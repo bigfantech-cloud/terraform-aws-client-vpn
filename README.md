@@ -32,7 +32,7 @@ Setup AWS Client VPN with federated-authentication
 
 | Name                | Description                                                  | Default |
 | ------------------- | ------------------------------------------------------------ | ------- |
-| `vpn_routes_config`     | List of Map of *(optional)*`authorization_group_name`, *(optional)*`authorization_group_id`, `target_cidr`, `description`                                                          |   []      |
+| `vpn_routes_config`     | List of Map of *(optional)*`authorization_group_name`,<br> *(optional)*`authorization_group_id`,<br> `target_cidr`,<br> `description`<br>example:<br>vpn_routes_config  = [<br>{<br>    group_name  = "the-group"<br>    group_id    = "abc-123-def"<br>    target_cidr = "192.168.0.0/18"<br>    description = "the group description"<br>    },<br>    {<br>    # Here no `authorization_group_name`, `authorization_group_id` specified<br>    # which will authorize all the groups to the target<br>    target_cidr = "192.168.32.0/18"<br>    description = "the another group description"<br>    }<br>] |   []      |
 | `dns_servers_ip`     | List of upto 2 DNS IP to use for DNS resoulution<br>If no DNS server is specified, the DNS address of the connecting device is used                                                          |    null     |
 | `session_timeout_hours`     | VPN session timeout in hours. Valid values: 8, 10, 12, 24                                                           |  8       |
 | `split_tunnel` | Whether to enable VPN split tunnel                          |      false   |
