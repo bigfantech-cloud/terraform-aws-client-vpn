@@ -86,7 +86,7 @@ resource "aws_ec2_client_vpn_network_association" "default" {
 
 resource "aws_ec2_client_vpn_authorization_rule" "all" {
   for_each = { for map in var.vpn_routes_config :
-      try("${map.authorization_group_name}.${map.target_cidr}", "${map.authorization_group_id}.${map.target_cidr}", map.target_cidr) => map
+      try("${map.authorization_group_name}_${map.target_cidr}", "${map.authorization_group_id}_${map.target_cidr}", map.target_cidr) => map
   }
 
   description            = each.value.description
@@ -97,7 +97,7 @@ resource "aws_ec2_client_vpn_authorization_rule" "all" {
 }
 
 resource "aws_ec2_client_vpn_route" "all" {
-  for_each = { for map in local.routes : "${map.subnet}.${map.route}" => map }
+  for_each = { for map in local.routes : "${map.subnet}_${map.route}" => map }
 
   description            = each.value.description
   client_vpn_endpoint_id = aws_ec2_client_vpn_endpoint.default.id
