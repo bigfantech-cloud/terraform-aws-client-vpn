@@ -1,6 +1,6 @@
 # v1.0.1
 
-### Feture
+### Feature
 
 #### what changed:
 
