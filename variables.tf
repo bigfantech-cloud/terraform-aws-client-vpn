@@ -35,9 +35,6 @@ variable "saml_self_service_metadata_document" {
   default     = null
 }
 
-
-self_service_saml_provider_arn - (Optional) The ARN of the IAM SAML identity provider for the self service portal if type is federated-authentication.
-
 # variable "secret_path_format" {
 #   description = <<-EOT
 #   The path format to use when writing secrets to the certificate backend.
