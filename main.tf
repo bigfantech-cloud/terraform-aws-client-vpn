@@ -27,7 +27,7 @@ resource "aws_iam_saml_provider" "self_service" {
 }
     
 resource "aws_cloudwatch_log_group" "default" {
-  name              = "${module.this.id}-logs"
+  name              = "/client-vpn"
   retention_in_days = var.cloudwatch_log_retention_in_days
 
   tags = module.this.tags
@@ -65,7 +65,7 @@ resource "aws_ec2_client_vpn_endpoint" "default" {
 }
 
 resource "aws_security_group" "client_vpn" {
-  name        = module.this.id
+  name        = "${module.this.id}-client-vpn"
   vpc_id      = var.vpc_id
   description = "Client VPN"
 
