@@ -11,7 +11,7 @@ locals {
 }
 
 resource "aws_iam_saml_provider" "default" {
-  name                   = "${module.this.id}-${var.saml_provider}"
+  name                   = "${module.this.id}-client-vpn-${var.saml_provider}"
   saml_metadata_document = var.saml_metadata_document
 
   tags = module.this.tags
@@ -20,7 +20,7 @@ resource "aws_iam_saml_provider" "default" {
 resource "aws_iam_saml_provider" "self_service" {
   count = var.saml_self_service_metadata_document =! null ? 1 : 0
   
-  name                   = "${module.this.id}-${var.saml_provider}-self-service"
+  name                   = "${module.this.id}-client-vpn-${var.saml_provider}-self-service"
   saml_metadata_document = var.saml_self_service_metadata_document
 
   tags = module.this.tags
