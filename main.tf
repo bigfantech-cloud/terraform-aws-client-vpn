@@ -18,9 +18,9 @@ resource "aws_iam_saml_provider" "default" {
 }
 
 resource "aws_iam_saml_provider" "self_service" {
-  count = var.saml_self_service_metadata_document =! null ? 1 : 0
+  count = var.saml_self_service_metadata_document != null ? 1 : 0
   
-  name                   = "${module.this.id}-client-vpn-${var.saml_provider}-self-service"
+  name                   = "${module.this.id}-client-vpn-self-service-${var.saml_provider}"
   saml_metadata_document = var.saml_self_service_metadata_document
 
   tags = module.this.tags
@@ -44,7 +44,7 @@ resource "aws_ec2_client_vpn_endpoint" "default" {
   client_cidr_block      = var.client_cidr_block
   split_tunnel           = var.split_tunnel
   dns_servers            = var.dns_servers_ip
-  self_service_portal    = var.saml_self_service_metadata_document =! null ? enabled : disabled
+  self_service_portal    = var.saml_self_service_metadata_document != null ? enabled : disabled
   session_timeout_hours  = var.session_timeout_hours
   vpc_id                 = var.vpc_id
   security_group_ids     = [aws_security_group.client_vpn.id]
@@ -52,7 +52,7 @@ resource "aws_ec2_client_vpn_endpoint" "default" {
   authentication_options {
     type                            = "federated-authentication"
     saml_provider_arn               = aws_iam_saml_provider.default.arn
-    self_service_saml_provider_arn  = var.saml_self_service_metadata_document =! null ? aws_iam_saml_provider.self_service[0].arn : null
+    self_service_saml_provider_arn  = var.saml_self_service_metadata_document != null ? aws_iam_saml_provider.self_service[0].arn : null
   }
     
   connection_log_options {
