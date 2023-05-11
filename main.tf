@@ -11,7 +11,7 @@ locals {
 }
 
 resource "aws_iam_saml_provider" "default" {
-  name                   = "${module.this.id}-${var.saml_provider}"
+  name                   = "${module.this.id}-client-vpn-${var.saml_provider}"
   saml_metadata_document = var.saml_metadata_document
 
   tags = module.this.tags
