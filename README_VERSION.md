@@ -1,3 +1,11 @@
+# v1.0.2
+
+### Misc
+
+#### what changed:
+
+CloudWatch log group name change
+
 # v1.0.1
 
 ### Feature
